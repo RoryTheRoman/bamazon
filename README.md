@@ -5,7 +5,9 @@ Bamazon is a command line application that uses node.  To run this project, you 
 Bamazon is a fictional online marketplace.  The app has two main users:  A customer or a manager.
 
 bamazonCustomer.js:
-To run the customer-facing app, type node bamazonCustomer.js.  Immediately, a list of all products available on the marketplace is shown.  After that, the user is prompted to say whether or not they want to buy or sell an item.
+To run the customer-facing app, type node bamazonCustomer.js.  Immediately, a list of all products available on the marketplace is shown.  
+![List Image](https://github.com/RoryTheRoman/bamazon/blob/master/images/productList.png)
+After that, the user is prompted to say whether or not they want to buy or sell an item.
 
 By selecting "BUY,"  the user is prompted to select the item of their desire and quantity of their purchase.  If there aren't enough in stock, they are re-prompted.  If bamazon is able to fulfill the order, the quantity in the database decreases.
 By selecting “SELL,” the user is prompted to enter the details of the item they’d like to sell, and that info is added to the database table.
