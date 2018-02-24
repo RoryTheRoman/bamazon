@@ -12,24 +12,24 @@ connection.connect(function(err) {
     if (err) throw err;
     // console.log("connected as id " + connection.threadId + "\n");
   });
-  function displayProducts (){
-      console.log("");
-      console.log("ITEMS CURRENTLY AVAILABLE ON BAMAZON:")
-      console.log("");
-      connection.query("SELECT * FROM products", function(err, res){
-          if(err) throw(err);
-          for (var i=0; i < res.length; i++){
-              console.log(  "" +
-                            "\nItem ID: " + res[i].item_id +
-                            "\nProduct Name: "+ res[i].product_name +
-                            "\nPrice: " + res[i].price +
-                            "\nNumber available: " + res[i].stock_quantity +
-                            "\n------------")
-          }
-        //   console.log(res);
-          buyOrSell();
-      });
-  }
+function displayProducts (){
+    console.log("");
+    console.log("ITEMS CURRENTLY AVAILABLE ON BAMAZON:")
+    console.log("");
+    connection.query("SELECT * FROM products", function(err, res){
+        if(err) throw(err);
+        for (var i=0; i < res.length; i++){
+            console.log(  "" +
+                        "\nItem ID: " + res[i].item_id +
+                        "\nProduct Name: "+ res[i].product_name +
+                        "\nPrice: " + res[i].price +
+                        "\nNumber available: " + res[i].stock_quantity +
+                        "\n------------")
+        }
+    //   console.log(res);
+        buyOrSell();
+    });
+};
 function buyOrSell(){
     inquirer
         .prompt([
@@ -43,13 +43,13 @@ function buyOrSell(){
         ])
         .then(function(res){
              if(res.buyorsell === "BUY"){
-                 console.log("It worked");
+
                  buyItem();
 
 
              }
              if(res.buyorsell === "SELL"){    
-                console.log("this also worked.")
+
                  sellItem();
 
              }
@@ -72,11 +72,23 @@ function sellItem(){
             type: "input",
             message: "Price?",
             name: "itemprice",
+            validate: function(value) {
+                if (isNaN(value) === false) {
+                  return true;
+                }
+                return false;
+              }            
         },
         {
             type: "input",
             message: "How many do you have to sell?",
             name: "itemquantity",
+            validate: function(value) {
+                if (isNaN(value) === false) {
+                  return true;
+                }
+                return false;
+              }            
         }                
     ])
     .then(function(response){
@@ -91,11 +103,12 @@ function sellItem(){
             },
             function(err){
                 if (err) throw err;
-                console.log("Go make them fat stacks.  Your item was added")
+                console.log("Go make them fat stacks.  Your item was added");
+                goAgain();
             }
         );
     });
-}
+};
 function buyItem (){
     connection.query("SELECT * FROM products", function(err, results) {
         if (err) throw err;
@@ -150,6 +163,7 @@ function buyItem (){
                         if (error) throw error;
                         console.log("");
                         console.log("Congrats!  You are the proud owner of " + answer.howmany + " " + chosenItem.product_name + ".");
+                        goAgain();
                     }
                 );
             }else{
@@ -159,9 +173,27 @@ function buyItem (){
             }
         });
     });    
-}
+};
 function goAgain(){
+    inquirer
+    .prompt([
+        {
+            type: "confirm",
+            message: "Would you like to list or buy another item?",
+            name: "goagain",
 
-}
+        },
+
+    ])
+    .then(function(response){
+        if (response.goagain){
+            displayProducts();
+        }else{
+            console.log("Come again soon!")
+            connection.end();
+        }
+    });
+
+};
 
 displayProducts();
