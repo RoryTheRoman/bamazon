@@ -39,6 +39,7 @@ function managerStartUp (){
             return;
 
             case "View Low Inventory":
+            lowInventory();
             return;
             
             case "Add to Inventory":
@@ -138,4 +139,20 @@ function addProd(){
     });
   
 }
+function lowInventory(){
+    connection.query("SELECT * FROM products WHERE stock_quantity < 5", function(err, res){
+        for(var i = 0; i < res.length; i++){
+            console.log(  "" +
+                        "\nItem ID: " + res[i].item_id +
+                        "\nProduct Name: "+ res[i].product_name +
+                        "\nPrice: " + res[i].price +
+                        "\nNumber available: " + res[i].stock_quantity +
+                        "\n------------" +
+                        "\n" +
+                        "\nSee Low Inventory Results Above^^^^^^^" +
+                        "\n");
+        };
+    managerStartUp();    
+    });
+};
 managerStartUp();
