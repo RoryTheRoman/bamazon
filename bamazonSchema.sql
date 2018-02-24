@@ -2,15 +2,21 @@ DROP DATABASE IF EXISTS bamazonDB;
 CREATE DATABASE bamazonDB;
 
 
+USE bamazonDB;
+
+
+
 CREATE TABLE products(
 	item_id INT NOT NULL AUTO_INCREMENT,
     product_name VARCHAR(100) NOT NULL,
     department_name VARCHAR(20) NOT NULL,
-    price DECIMAL (10,2) NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
     stock_quantity INTEGER NOT NULL,
     PRIMARY KEY (item_id)
 );
 
+DROP TABLE products;
+SELECT * FROM products;
 
 INSERT INTO products (product_name, department_name, price, stock_quantity)
 VALUES  ("Obama Mug", "Housewares", 10.00, 5),
@@ -20,6 +26,6 @@ VALUES  ("Obama Mug", "Housewares", 10.00, 5),
         ("Vintage 80's Ski Jacket, Size Men's Medium", "Clothing", 45.00, 1),
         ("Natural Edge Wood Coffee Table", "Furniture", 400.00, 1),
         ("Authentic Herman Miller Eames Chair", "Furniture", 4000, 2),
-        ("Garbage Pail Kids Cards - Set of 10 - random, not in package", "Collectibles", 3.00, 15),
+        ("Garbage Pail Kids Cards - Set of 10 - random - not in package", "Collectibles", 3.00, 15),
         ("REO Speedwagon T-shirt, Size Men's Medium", "Clothing", 0.50, 1),
-        ("Vintage Bubble Letter City Postcards", "Collectibles", 5.00, 4000);
+        ("Vintage Bubble Letter City Postcards", "Collectibles",  5.00, 400);
