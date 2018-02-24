@@ -23,7 +23,7 @@ function managerStartUp (){
             choices: [
                 "View Products for Sale",
                 "View Low Inventory",
-                "Add to Inventory",
+                "Add to Inventory Numbers",
                 "Add new Product",
                 "Exit"
             ],
@@ -42,15 +42,16 @@ function managerStartUp (){
             lowInventory();
             return;
             
-            case "Add to Inventory":
-            addProd();
+            case "Add to Inventory Numbers":
+            console.log(""+ "\nTHIS SITE IS BEING DEVELOPED.  REDIRECTING....." + "\n");
+            managerStartUp();
             return;
 
             case "Add new Product":
+            addProd();
             return;
 
             case "Exit":
-            console.log("See ya later.  You're a manager.  Go fire someone.");
             end();
             return;
         }
@@ -71,7 +72,7 @@ function mgrAllProds (){
                         "\nNumber available: " + res[i].stock_quantity +
                         "\n------------" +
                         "\n" +
-                        "\nSee Items Above^^^^" +
+                        "\nSEE ITEMS ABOVE^^^^" +
                         "\n");
         }
     managerStartUp();        
@@ -79,6 +80,7 @@ function mgrAllProds (){
 };
 
 function end(){
+    console.log("" + "\nSee ya later.  You're a manager.  Go fire someone."+ "\n");
     connection.end();
 };
 function addProd(){
@@ -149,9 +151,9 @@ function lowInventory(){
                         "\nNumber available: " + res[i].stock_quantity +
                         "\n------------" +
                         "\n" +
-                        "\nSee Low Inventory Results Above^^^^^^^" +
                         "\n");
         };
+        console.log("SEE LOW INVENTORY RESULTS ABOVE^^^^^" + "\n");
     managerStartUp();    
     });
 };
