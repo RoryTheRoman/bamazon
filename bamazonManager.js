@@ -155,4 +155,5 @@ function lowInventory(){
     managerStartUp();    
     });
 };
+
 managerStartUp();
